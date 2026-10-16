@@ -1,3 +1,4 @@
+
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../app');
@@ -7,6 +8,16 @@ const MONGO_URI =
 
 beforeAll(async () => {
     await mongoose.connect(MONGO_URI);
+
+    // Chỉ cho phép chạy test với database có tên kết thúc bằng _test
+    const dbName = mongoose.connection.db.databaseName;
+
+    if (!dbName.endsWith('_test')) {
+        await mongoose.connection.close();
+        throw new Error(
+            `Unsafe test database: ${dbName}. Database name must end with _test`
+        );
+    }
 });
 
 afterAll(async () => {
