@@ -34,7 +34,7 @@ jobs:
           docker run -d \
             --name mongo-ci \
             --network product-ci-network \
-            mongo:8
+            mongo:7
           docker run -d \
             --name product-api-ci \
             --network product-ci-network \
