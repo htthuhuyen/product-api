@@ -111,8 +111,4 @@ describe('Product API CRUD Test', () => {
         expect(res.statusCode).toBe(404);
     });
 
-
-
-
-
 });
